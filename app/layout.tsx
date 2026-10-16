@@ -1,0 +1,38 @@
+import type { Metadata, Viewport } from "next";
+import { Cormorant_Garamond, Great_Vibes, Outfit } from "next/font/google";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { StoreProvider } from "@/context/StoreProvider";
+import { getStorefront } from "@/lib/storefront";
+import "./globals.css";
+
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+const cormorant = Cormorant_Garamond({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-serif" });
+const vibes = Great_Vibes({ subsets: ["latin"], weight: "400", variable: "--font-script" });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+export const metadata: Metadata = {
+  title: { default: "Sthree Designer Studio — The vintage fashion for modern women", template: "%s · Sthree" },
+  description: "Sthree Designer Studio in Nagole, Hyderabad. Vintage fashion for modern women — lehengas, suits, and ethnic attire.",
+};
+
+export const dynamic = "force-dynamic";
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const storefront = await getStorefront();
+  return (
+    <html lang="en" className={`${outfit.variable} ${cormorant.variable} ${vibes.variable}`}>
+      <body>
+        <StoreProvider catalog={storefront.products} settings={storefront.settings}>
+          <Header />
+          <main id="content">{children}</main>
+          <Footer />
+        </StoreProvider>
+      </body>
+    </html>
+  );
+}
