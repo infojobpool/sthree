@@ -5,7 +5,9 @@ out
 *.log
 next-env.d.ts
 .vercel
+.neon
 .env
+.env.local
 prisma/dev.db
 prisma/dev.db-journal
 tsconfig.tsbuildinfo
