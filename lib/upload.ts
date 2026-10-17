@@ -1,3 +1,4 @@
+import { put } from "@vercel/blob";
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
 
@@ -16,6 +17,15 @@ export async function saveUpload(value: FormDataEntryValue | null) {
   if (!ext) return null;
   if (file.size > 8 * 1024 * 1024) return null;
   const name = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (token) {
+    const blob = await put(`uploads/${name}`, file, {
+      access: "public",
+      token,
+      addRandomSuffix: false,
+    });
+    return blob.url;
+  }
   const dir = path.join(process.cwd(), "public", "uploads");
   await mkdir(dir, { recursive: true });
   await writeFile(path.join(dir, name), Buffer.from(await file.arrayBuffer()));
