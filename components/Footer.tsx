@@ -25,6 +25,7 @@ export default function Footer({ image = defaultHomeMedia.footer }: { image?: st
         </div>
         <div className="footer-col">
           <h2>Shop</h2>
+          <Link href="/shop">Order online</Link>
           <Link href="/shop?highlight=new">New pieces</Link>
           <Link href="/shop?cat=lehenga">Lehenga</Link>
           <Link href="/shop?cat=saree">Sarees</Link>

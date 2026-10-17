@@ -4,10 +4,12 @@ import HouseBand from "@/components/HouseBand";
 import KidsCollection from "@/components/KidsCollection";
 import OccasionSlider from "@/components/OccasionSlider";
 import OfferSlider from "@/components/OfferSlider";
+import OrderBand from "@/components/OrderBand";
 import ProductCard from "@/components/ProductCard";
 import StageDeck from "@/components/StageDeck";
 import WeddingFloor from "@/components/WeddingFloor";
 import { categories } from "@/lib/catalog";
+import { formatINR, FREE_SHIPPING, PROMO_CODE } from "@/lib/format";
 import { getHomeMedia, getStorefront } from "@/lib/storefront";
 import { sisterLine, studio } from "@/lib/studio";
 
@@ -48,8 +50,8 @@ export default async function HomePage() {
             floor: true,
             eyebrow: "Nagole showroom",
             title: "More than a photograph",
-            text: "Try the fall, the blouse, and the dupatta on the floor before you decide.",
-            cta: "Shop the edit",
+            text: "Order the piece from the site, or try the fall on the floor in Nagole before you decide.",
+            cta: "Order online",
             secondaryHref: "/showrooms",
             secondary: "Visit the studio",
           },
@@ -83,6 +85,7 @@ export default async function HomePage() {
         products={[]}
       />
   <div className="home">
+      <OrderBand />
 
       <section className="section">
         <div className="section-head">
@@ -144,7 +147,7 @@ export default async function HomePage() {
           <div>
             <p className="eyebrow">In Hyderabad</p>
             <h2>Visit the studio</h2>
-            <p>Two shopping outlets in Hyderabad. Try the fall, the blouse, and the dupatta before you decide. Walk in on a weekday, or send a note ahead.</p>
+            <p>Two shopping outlets in Hyderabad. Try the fall on the floor, or order from the site if you already know the piece. Walk in on a weekday, or send a note ahead.</p>
             <p className="visit-meta">
               <a href={`https://maps.google.com/?q=${encodeURIComponent(studio.address)}`} target="_blank" rel="noreferrer">
                 {studio.address}
@@ -163,7 +166,8 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="visit-actions">
-            <a className="btn" href={studio.whatsapp} target="_blank" rel="noreferrer">WhatsApp the studio</a>
+            <Link className="btn" href="/shop">Order online</Link>
+            <a className="btn btn-ghost" href={studio.whatsapp} target="_blank" rel="noreferrer">WhatsApp the studio</a>
             <Link className="btn btn-ghost" href="/showrooms">Showroom details</Link>
           </div>
         </div>
@@ -174,6 +178,7 @@ export default async function HomePage() {
         <div className="feature-grid">
           <article className="feature"><h3>A sisters' house</h3><p>{sisterLine} opened the floor in {studio.opened}. The edit is still chosen the way they dress their own family.</p></article>
           <article className="feature"><h3>Two Hyderabad outlets</h3><p>Walk in at Nagole, or call for the nearer floor. Weekdays are quieter; send a note ahead if you want a piece kept ready.</p></article>
+          <article className="feature"><h3>Order from home</h3><p>Bag it on the site with {PROMO_CODE}. Complimentary shipping above {formatINR(FREE_SHIPPING)}. WhatsApp if you want the desk to check a size first.</p></article>
           <article className="feature"><h3>Five hundred families</h3><p>They come back because a lehenga can be worn for hours, and a blouse is fitted on the floor.</p></article>
         </div>
       </section>
