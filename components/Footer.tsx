@@ -18,60 +18,51 @@ export default function Footer({ image = defaultHomeMedia.footer }: { image?: st
 
   return (
     <footer className="footer">
-      <div className="footer-top">
-        <div className="footer-brand">
-          <Link href="/" className="footer-mark">Sthree</Link>
-          <p className="footer-blurb">{studio.tagline}. A sisters' house in Nagole, kept for eight years.</p>
-        </div>
-        <div className="footer-col">
-          <h2>Shop</h2>
-          <Link href="/shop">Order online</Link>
-          <Link href="/shop?highlight=new">New pieces</Link>
-          <Link href="/shop?cat=lehenga">Lehenga</Link>
-          <Link href="/shop?cat=saree">Sarees</Link>
-          <Link href="/shop?highlight=bestseller">Bestsellers</Link>
-        </div>
-        <div className="footer-col">
-          <h2>The house</h2>
-          <Link href="/about">About & Contact</Link>
-          <Link href="/showrooms">Showrooms</Link>
-          <Link href="/privacy">Privacy</Link>
-        </div>
-        <div className="footer-col">
-          <h2>Care</h2>
-          <Link href="/shipping">Shipping & returns</Link>
-          <Link href="/track">Track order</Link>
-          <Link href="/wishlist">Wishlist</Link>
-          <a href={studio.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
-        </div>
-        <div className="footer-col footer-notes">
-          <h2>Notes</h2>
-          <p>New collections and floor notes from the studio.</p>
-          <form className="newsletter" onSubmit={subscribe}>
-            <label htmlFor="news-email" className="sr-only">Email address</label>
-            {joined ? <p className="success">You are on the list.</p> : (
-              <div className="news-row">
-                <input id="news-email" type="email" required placeholder="Your email" />
-                <button className="btn footer-join" type="submit">Join</button>
-              </div>
-            )}
-          </form>
-        </div>
-      </div>
       <div className="footer-stage">
         <div className="footer-cast" aria-hidden="true">
           <img src={image} alt="" />
         </div>
-        <svg className="footer-silk" viewBox="0 0 1440 280" preserveAspectRatio="none" aria-hidden="true">
-          <path fill="url(#silk)" d="M-80 90C120 10 240 170 420 70C600 -30 640 190 900 80C1080 0 1200 130 1520 40L1520 0H-80Z" />
-          <defs>
-            <linearGradient id="silk" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stopColor="#d6148e" stopOpacity="0.95" />
-              <stop offset="0.45" stopColor="#a43ab8" stopOpacity="0.72" />
-              <stop offset="1" stopColor="#d6148e" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-        </svg>
+        <div className="footer-veil" aria-hidden="true" />
+        <div className="footer-top">
+          <div className="footer-brand">
+            <Link href="/" className="footer-mark">Sthree</Link>
+            <p className="footer-blurb">{studio.tagline}. A sisters' house in Nagole, kept for eight years.</p>
+          </div>
+          <div className="footer-col">
+            <h2>Shop</h2>
+            <Link href="/shop">Order online</Link>
+            <Link href="/shop?highlight=new">New pieces</Link>
+            <Link href="/shop?cat=lehenga">Lehenga</Link>
+            <Link href="/shop?cat=saree">Sarees</Link>
+            <Link href="/shop?highlight=bestseller">Bestsellers</Link>
+          </div>
+          <div className="footer-col">
+            <h2>The house</h2>
+            <Link href="/about">About & Contact</Link>
+            <Link href="/showrooms">Showrooms</Link>
+            <Link href="/privacy">Privacy</Link>
+          </div>
+          <div className="footer-col">
+            <h2>Care</h2>
+            <Link href="/shipping">Shipping & returns</Link>
+            <Link href="/track">Track order</Link>
+            <Link href="/wishlist">Wishlist</Link>
+            <a href={studio.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
+          </div>
+          <div className="footer-col footer-notes">
+            <h2>Notes</h2>
+            <p>New collections and floor notes from the studio.</p>
+            <form className="newsletter" onSubmit={subscribe}>
+              <label htmlFor="news-email" className="sr-only">Email address</label>
+              {joined ? <p className="success">You are on the list.</p> : (
+                <div className="news-row">
+                  <input id="news-email" type="email" required placeholder="Your email" />
+                  <button className="btn footer-join" type="submit">Join</button>
+                </div>
+              )}
+            </form>
+          </div>
+        </div>
         <div className="footer-bar">
           <p className="fineprint">© {new Date().getFullYear()} Sthree Designer Studio. All rights reserved.</p>
           <div className="footer-social">
