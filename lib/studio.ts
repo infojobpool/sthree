@@ -7,4 +7,12 @@ export const studio = {
   instagram: "https://www.instagram.com/sthreedesignerstudios",
   instagramLabel: "@sthreedesignerstudios",
   whatsapp: "https://wa.me/917995255536",
+  sisters: ["Swarna", "Swathi", "Santhoshi"] as const,
+  family: "Gitta",
+  opened: 2018,
+  years: 8,
+  families: 500,
+  outlets: 2,
 };
+
+export const sisterLine = `${studio.sisters.slice(0, -1).join(", ")}, and ${studio.sisters.at(-1)} ${studio.family}`;

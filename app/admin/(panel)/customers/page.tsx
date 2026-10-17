@@ -12,8 +12,8 @@ export default async function AdminCustomers() {
   return (
     <>
       <header className="desk-head">
-        <p className="eyebrow">Customers</p>
-        <h1>{customers.length === 1 ? "1 account" : `${customers.length} accounts`}</h1>
+        <h1>Customers</h1>
+        <p className="desk-note">{customers.length === 1 ? "1 account" : `${customers.length} accounts`}</p>
       </header>
       {customers.length === 0 ? <p>No customer accounts yet.</p> : (
         <div className="desk-table-wrap">

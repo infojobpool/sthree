@@ -2,8 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Great_Vibes, Outfit } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import OfferPopup from "@/components/OfferPopup";
 import { StoreProvider } from "@/context/StoreProvider";
-import { getStorefront } from "@/lib/storefront";
+import { getHomeMedia, getStorefront } from "@/lib/storefront";
 import "./globals.css";
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -23,14 +24,15 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const storefront = await getStorefront();
+  const [storefront, media] = await Promise.all([getStorefront(), getHomeMedia()]);
   return (
     <html lang="en" className={`${outfit.variable} ${cormorant.variable} ${vibes.variable}`}>
       <body>
         <StoreProvider catalog={storefront.products} settings={storefront.settings}>
           <Header />
           <main id="content">{children}</main>
-          <Footer />
+          <Footer image={media.footer} />
+          <OfferPopup />
         </StoreProvider>
       </body>
     </html>

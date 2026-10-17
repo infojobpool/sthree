@@ -15,9 +15,8 @@ export default async function AdminSettings({ searchParams }: { searchParams: Pr
   return (
     <>
       <header className="desk-head">
-        <p className="eyebrow">Shop settings</p>
-        <h1>Offer and shipping</h1>
-        <p className="desk-note">The festive offer stays a flat 20% when the code is on. You can change the code word, turn it off, and set the shipping line. Complimentary shipping is currently {formatINR(settings.freeShipping)}.</p>
+        <h1>Settings</h1>
+        <p className="desk-note">The offer stays a flat 20% when the code is on. Complimentary shipping is currently {formatINR(settings.freeShipping)}.</p>
       </header>
       {notice && notices[notice] ? <p className="success">{notices[notice]}</p> : null}
       <form className="desk-card desk-form desk-form-narrow" action={saveSettings}>

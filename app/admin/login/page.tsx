@@ -35,8 +35,8 @@ export default function AdminLogin() {
   return (
     <div className="admin-login">
       <form className="stack-form admin-card" onSubmit={submit}>
-        <p className="eyebrow">Sthree</p>
-        <h1>Studio desk</h1>
+        <p className="eyebrow">Sthree desk</p>
+        <h1>Sign in</h1>
         <label className="field">Email<input name="email" type="email" required autoComplete="username" /></label>
         <label className="field">Password<input name="password" type="password" required autoComplete="current-password" /></label>
         {error ? <p className="error">{error}</p> : null}

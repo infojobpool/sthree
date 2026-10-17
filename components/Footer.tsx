@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FormEvent, useState } from "react";
-import { footerPhoto, looks } from "@/lib/photos";
+import { defaultHomeMedia } from "@/lib/media";
 import { studio } from "@/lib/studio";
 
-export default function Footer() {
+export default function Footer({ image = defaultHomeMedia.footer }: { image?: string }) {
   const pathname = usePathname();
   const [joined, setJoined] = useState(false);
   if (pathname.startsWith("/admin")) return null;
@@ -21,7 +21,7 @@ export default function Footer() {
       <div className="footer-top">
         <div className="footer-brand">
           <Link href="/" className="footer-mark">Sthree</Link>
-          <p className="footer-blurb">{studio.tagline}, finished in Nagole.</p>
+          <p className="footer-blurb">{studio.tagline}. A sisters' house in Nagole, kept for eight years.</p>
         </div>
         <div className="footer-col">
           <h2>Shop</h2>
@@ -59,7 +59,7 @@ export default function Footer() {
       </div>
       <div className="footer-stage">
         <div className="footer-cast" aria-hidden="true">
-          <img src={footerPhoto(looks.ivory)} alt="" />
+          <img src={image} alt="" />
         </div>
         <svg className="footer-silk" viewBox="0 0 1440 280" preserveAspectRatio="none" aria-hidden="true">
           <path fill="url(#silk)" d="M-80 90C120 10 240 170 420 70C600 -30 640 190 900 80C1080 0 1200 130 1520 40L1520 0H-80Z" />

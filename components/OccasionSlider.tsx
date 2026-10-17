@@ -2,16 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { looks, portraitPhoto } from "@/lib/photos";
-
-const occasions = [
-  { name: "Wedding", href: "/shop?cat=lehenga", image: portraitPhoto(looks.ivory) },
-  { name: "Sangeet", href: "/shop?cat=lehenga", image: portraitPhoto(looks.blush) },
-  { name: "Festive morning", href: "/shop?cat=dupatta", image: portraitPhoto(looks.pearl) },
-  { name: "Everyday", href: "/shop?cat=co-ord-set", image: portraitPhoto(looks.sage) },
-  { name: "Brunch", href: "/shop?cat=co-ord-set", image: portraitPhoto(looks.garden) },
-  { name: "Festive day", href: "/shop?cat=saree", image: portraitPhoto(looks.ruby) },
-];
+import { defaultOccasions, type OccasionCard } from "@/lib/media";
 
 function offsetOf(card: number, index: number, count: number) {
   let delta = card - index;
@@ -21,7 +12,8 @@ function offsetOf(card: number, index: number, count: number) {
   return delta;
 }
 
-export default function OccasionSlider() {
+export default function OccasionSlider({ items = defaultOccasions }: { items?: OccasionCard[] }) {
+  const occasions = items.length ? items : defaultOccasions;
   const count = occasions.length;
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);

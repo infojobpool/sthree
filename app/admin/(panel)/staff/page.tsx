@@ -23,9 +23,8 @@ export default async function AdminStaff({ searchParams }: { searchParams: Promi
   return (
     <>
       <header className="desk-head">
-        <p className="eyebrow">Staff</p>
-        <h1>Desk logins</h1>
-        <p className="desk-note">Signed in as {session?.email}. Add another person who can use this desk, or change your own password.</p>
+        <h1>Staff</h1>
+        <p className="desk-note">Signed in as {session?.email}. Add a desk login or change your password.</p>
       </header>
       {notice && notices[notice] ? <p className="success">{notices[notice]}</p> : null}
       {error && errors[error] ? <p className="error">{errors[error]}</p> : null}

@@ -58,9 +58,30 @@ model ProductEdit {
   compareAt Int?
   inStock   Boolean
   hidden    Boolean @default(false)
+  image     String?
 }
 
 model Setting {
   key   String @id
   value String
+}
+
+model StudioProduct {
+  slug        String   @id
+  sku         String
+  name        String
+  category    String
+  audience    String
+  price       Int
+  compareAt   Int?
+  colors      String
+  sizes       String
+  image       String
+  description String   @default("")
+  fabric      String   @default("")
+  includes    String   @default("[]")
+  highlights  String   @default("[]")
+  inStock     Boolean  @default(true)
+  hidden      Boolean  @default(false)
+  createdAt   DateTime @default(now())
 }

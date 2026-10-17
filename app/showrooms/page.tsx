@@ -9,6 +9,12 @@ const rooms = [
     hours: "Open daily, 11:00 – 8:30",
     phone: "7995255536 · 7995255537 · 7995255538",
   },
+  {
+    name: "Second Hyderabad outlet",
+    address: "A second shopping floor in Hyderabad. Call or WhatsApp the desk and they will send you to the nearer outlet.",
+    hours: "Open daily, 11:00 – 8:30",
+    phone: "7995255536 · 7995255537 · 7995255538",
+  },
 ];
 
 export default function ShowroomsPage() {
@@ -17,7 +23,7 @@ export default function ShowroomsPage() {
       <header className="page-title">
         <p className="eyebrow">Visit</p>
         <h1>Showrooms</h1>
-        <p>Try the fall of a lehenga before you take it home. Appointments are welcome; walk-ins are fine on weekdays.</p>
+        <p>Two shopping outlets in Hyderabad. Try the fall of a lehenga before you take it home. Appointments are welcome; walk-ins are fine on weekdays.</p>
       </header>
       <div className="room-grid">
         {rooms.map((room) => (

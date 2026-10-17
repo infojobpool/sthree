@@ -17,13 +17,15 @@ export default async function AdminOrders({ searchParams }: { searchParams: Prom
   return (
     <>
       <header className="desk-head">
-        <p className="eyebrow">Orders</p>
-        <h1>{orders.length === 1 ? "1 order" : `${orders.length} orders`}</h1>
+        <h1>Orders</h1>
+        <p className="desk-note">{orders.length === 1 ? "1 order" : `${orders.length} orders`}</p>
       </header>
-      <form className="desk-search" action="/admin/orders">
-        <input name="q" defaultValue={q} placeholder="Order id, name, or mobile" aria-label="Find an order" />
-        <button className="btn" type="submit">Find</button>
-      </form>
+      <div className="desk-toolbar">
+        <form className="desk-search" action="/admin/orders">
+          <input name="q" defaultValue={q} placeholder="Search order id, name, or mobile" aria-label="Find an order" />
+          <button className="btn" type="submit">Search</button>
+        </form>
+      </div>
       {orders.length === 0 ? <p className="desk-note">No orders match.</p> : (
         <div className="desk-table-wrap">
           <table className="desk-table">
@@ -40,7 +42,7 @@ export default async function AdminOrders({ searchParams }: { searchParams: Prom
                     <small>{order.customer.address}, {order.customer.city} {order.customer.pincode}</small>
                   </td>
                   <td>{order.lines.map((line) => `${line.name} · ${line.size} × ${line.qty}`).join(", ")}</td>
-                  <td>{order.paymentStatus}<br /><small>{order.payment}{order.code ? ` · ${order.code}` : ""}</small></td>
+                  <td><span className={`desk-pill${order.paymentStatus === "Paid" ? " is-ok" : " is-warn"}`}>{order.paymentStatus}</span><br /><small>{order.payment}{order.code ? ` · ${order.code}` : ""}</small></td>
                   <td>{formatINR(order.total)}</td>
                   <td><OrderStatus id={order.id} status={order.status} /></td>
                 </tr>

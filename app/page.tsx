@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CategoryScroller from "@/components/CategoryScroller";
+import HouseBand from "@/components/HouseBand";
 import KidsCollection from "@/components/KidsCollection";
 import OccasionSlider from "@/components/OccasionSlider";
 import OfferSlider from "@/components/OfferSlider";
@@ -7,9 +8,8 @@ import ProductCard from "@/components/ProductCard";
 import StageDeck from "@/components/StageDeck";
 import WeddingFloor from "@/components/WeddingFloor";
 import { categories } from "@/lib/catalog";
-import { getStorefront } from "@/lib/storefront";
-import { heroPhoto, looks } from "@/lib/photos";
-import { studio } from "@/lib/studio";
+import { getHomeMedia, getStorefront } from "@/lib/storefront";
+import { sisterLine, studio } from "@/lib/studio";
 
 const circleCovers: Record<string, { image: string; focus?: string }> = {
   designer: { image: "/looks/designer-gown.png", focus: "center 18%" },
@@ -24,7 +24,7 @@ const notes = [
 ];
 
 export default async function HomePage() {
-  const { products } = await getStorefront();
+  const [{ products }, media] = await Promise.all([getStorefront(), getHomeMedia()]);
   const cover = (slug: string) => products.find((product) => product.category === slug);
   const edit = categories.filter((category) => products.some((product) => product.category === category.slug && product.audience === "women"));
   const women = products.filter((product) => product.audience === "women");
@@ -42,7 +42,7 @@ export default async function HomePage() {
       <OfferSlider
         banners={[
           {
-            src: heroPhoto(looks.ivory),
+            src: media.heroes[0],
             alt: "Ivory Arch Lehenga",
             href: "/shop",
             floor: true,
@@ -54,7 +54,7 @@ export default async function HomePage() {
             secondary: "Visit the studio",
           },
           {
-            src: heroPhoto(looks.blush),
+            src: media.heroes[1],
             alt: "Blush Pavilion Lehenga",
             href: "/product/blush-pavilion-lehenga",
             floor: true,
@@ -64,7 +64,7 @@ export default async function HomePage() {
             cta: "View this piece",
           },
           {
-            src: heroPhoto(looks.pearl),
+            src: media.heroes[2],
             alt: "Pearl Hour Lehenga",
             href: "/product/pearl-hour-lehenga",
             floor: true,
@@ -74,7 +74,7 @@ export default async function HomePage() {
             cta: "View this piece",
           },
           {
-            src: "/banners/dasara-double-dhamaka.jpg",
+            src: media.dasara,
             alt: "Sthree Dasara Double Dhamaka banner",
             href: "/shop",
             graphic: true,
@@ -99,7 +99,7 @@ export default async function HomePage() {
         />
       </section>
 
-      <OccasionSlider />
+      <OccasionSlider items={media.occasions} />
 
       <StageDeck
         products={best}
@@ -112,6 +112,8 @@ export default async function HomePage() {
       <WeddingFloor products={wedding} />
 
       <KidsCollection products={kidsPieces} />
+
+      <HouseBand />
 
       <section className="section">
         <div className="section-head">
@@ -142,9 +144,23 @@ export default async function HomePage() {
           <div>
             <p className="eyebrow">In Hyderabad</p>
             <h2>Visit the studio</h2>
-            <p>Try the fall, the blouse, and the dupatta before you decide. Walk in on a weekday, or send a note ahead.</p>
-            <p className="visit-meta">{studio.address}</p>
-            <p className="visit-meta">Open daily, 11:00 – 8:30 · {studio.phones[0]}</p>
+            <p>Two shopping outlets in Hyderabad. Try the fall, the blouse, and the dupatta before you decide. Walk in on a weekday, or send a note ahead.</p>
+            <p className="visit-meta">
+              <a href={`https://maps.google.com/?q=${encodeURIComponent(studio.address)}`} target="_blank" rel="noreferrer">
+                {studio.address}
+              </a>
+            </p>
+            <p className="visit-meta">
+              Open daily, 11:00 – 8:30
+              {studio.phones[0].split(",").map((phone) => {
+                const digits = phone.replace(/\D/g, "");
+                return (
+                  <a key={digits} className="visit-phone" href={`tel:+91${digits}`}>
+                    {digits}
+                  </a>
+                );
+              })}
+            </p>
           </div>
           <div className="visit-actions">
             <a className="btn" href={studio.whatsapp} target="_blank" rel="noreferrer">WhatsApp the studio</a>
@@ -156,9 +172,9 @@ export default async function HomePage() {
       <section className="section">
         <div className="section-head"><h2>Why the house</h2></div>
         <div className="feature-grid">
-          <article className="feature"><h3>Hand-finished</h3><p>Embroidery is placed so a lehenga can be worn for hours, not just photographed.</p></article>
-          <article className="feature"><h3>Showroom first</h3><p>Try the fall, the blouse, and the dupatta in person before you decide.</p></article>
-          <article className="feature"><h3>A full floor</h3><p>Kurtis, sarees, and dupattas sit beside the lehengas — one edit, not a marketplace.</p></article>
+          <article className="feature"><h3>A sisters' house</h3><p>{sisterLine} opened the floor in {studio.opened}. The edit is still chosen the way they dress their own family.</p></article>
+          <article className="feature"><h3>Two Hyderabad outlets</h3><p>Walk in at Nagole, or call for the nearer floor. Weekdays are quieter; send a note ahead if you want a piece kept ready.</p></article>
+          <article className="feature"><h3>Five hundred families</h3><p>They come back because a lehenga can be worn for hours, and a blouse is fitted on the floor.</p></article>
         </div>
       </section>
     </div>

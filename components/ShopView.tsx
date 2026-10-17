@@ -102,14 +102,23 @@ export default function ShopView() {
 
   const from = result.total === 0 ? 0 : result.start + 1;
   const to = result.start + result.items.length;
+  const bannerPhoto =
+    query.cats.length === 1
+      ? pool.find((product) => product.category === query.cats[0])?.image
+      : query.who
+        ? pool.find((product) => product.audience === query.who)?.image
+        : undefined;
 
   return (
     <div className="shop-wrap">
-      <section className="cat-banner">
-        <p className="eyebrow">{audience ? "Department" : "Category"}</p>
-        <h1>{title}</h1>
-        <p>{line}</p>
-        <p className="style-count">{result.total} {result.total === 1 ? "style" : "styles"}</p>
+      <section className={`cat-banner${bannerPhoto ? " has-photo" : ""}`}>
+        <div>
+          <p className="eyebrow">{audience ? "Department" : "Category"}</p>
+          <h1>{title}</h1>
+          <p>{line}</p>
+          <p className="style-count">{result.total} {result.total === 1 ? "style" : "styles"}</p>
+        </div>
+        {bannerPhoto ? <img src={bannerPhoto} alt="" /> : null}
       </section>
 
       <div className="circle-row" role="tablist" aria-label="Categories">

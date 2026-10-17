@@ -23,9 +23,8 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
   return (
     <article className="bill">
       <header className="desk-head">
-        <p className="eyebrow">Order</p>
         <h1>{order.id}</h1>
-        <p className="desk-note">{new Date(order.createdAt).toLocaleString("en-IN")} · {order.status} · {order.paymentStatus}</p>
+        <p className="desk-note">{new Date(order.createdAt).toLocaleString("en-IN")} · <span className="desk-pill">{order.status}</span> · <span className={`desk-pill${order.paymentStatus === "Paid" ? " is-ok" : " is-warn"}`}>{order.paymentStatus}</span></p>
       </header>
       <div className="desk-actions no-print">
         <Link href="/admin/orders">All orders</Link>
